@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  root :to => 'users#index'
+  root 'users#index'
   resources :sessions
   resources :users
+  resource :user_mfa_session, only: %i(new create)
 
   get 'login' => 'sessions#new', :as => :login
   post 'logout' => 'sessions#destroy', :as => :logout
