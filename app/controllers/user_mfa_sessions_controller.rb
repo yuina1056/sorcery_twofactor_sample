@@ -9,6 +9,9 @@ class UserMfaSessionsController < ApplicationController
   def create
     email = session[:email]
     password = session[:password]
+    if check_authparam(params[:auth][:mfa_code])
+      redirect_to new_session_path
+    end
     @user = User.find_by(email: email)
     if @user.google_authentic?(params[:auth][:mfa_code])
       reset_session
@@ -25,4 +28,10 @@ class UserMfaSessionsController < ApplicationController
       redirect_to new_session_path
     end
   end
+
+  private
+
+    def check_authparam(param)
+      param.match(/\A\d+\z/)
+    end
 end
