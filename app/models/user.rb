@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
@@ -8,6 +10,6 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
 
   acts_as_google_authenticated lookup_token: :persistence_token, drift: 30, issuer: 'test_twofactor_auth'
-  before_create {|record| record.persistence_token = SecureRandom.hex unless record.persistence_token }
-  after_create {|record| record.set_google_secret }
+  before_create { |record| record.persistence_token = SecureRandom.hex unless record.persistence_token }
+  after_create { |record| record.set_google_secret }
 end

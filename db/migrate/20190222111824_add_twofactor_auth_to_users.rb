@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddTwofactorAuthToUsers < ActiveRecord::Migration[5.2]
   def change
     add_column :users, :persistence_token, :string

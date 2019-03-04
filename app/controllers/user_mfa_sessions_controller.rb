@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserMfaSessionsController < ApplicationController
   skip_before_action :require_login
   skip_before_action :check_mfa
@@ -9,9 +11,7 @@ class UserMfaSessionsController < ApplicationController
   def create
     email = session[:email]
     password = session[:password]
-    if check_authparam(params[:auth][:mfa_code])
-      redirect_to new_session_path
-    end
+    redirect_to new_session_path if check_authparam(params[:auth][:mfa_code])
     @user = User.find_by(email: email)
     if @user.google_authentic?(params[:auth][:mfa_code])
       reset_session
@@ -31,7 +31,7 @@ class UserMfaSessionsController < ApplicationController
 
   private
 
-    def check_authparam(param)
-      param.match(/\A\d+\z/)
-    end
+  def check_authparam(param)
+    param.match(/\A\d+\z/)
+  end
 end

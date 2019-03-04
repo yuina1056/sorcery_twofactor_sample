@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   before_action :require_login
   before_action :check_mfa
@@ -5,7 +7,7 @@ class ApplicationController < ActionController::Base
   private
 
   def not_authenticated
-    redirect_to login_path, alert: "Please login first"
+    redirect_to login_path, alert: 'Please login first'
   end
 
   def check_mfa

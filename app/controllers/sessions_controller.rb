@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   skip_before_action :require_login, expect: [:destroy]
   prepend_before_action :authenticate_with_two_factor, only: :create
@@ -7,8 +9,7 @@ class SessionsController < ApplicationController
     @user = User.new
   end
 
-  def create
-  end
+  def create; end
 
   def destroy
     logout
