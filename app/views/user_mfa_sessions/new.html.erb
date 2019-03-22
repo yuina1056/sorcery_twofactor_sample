@@ -2,7 +2,7 @@
   <%= flash[:error] %>
   <br />
 <% end %>
-<img src="<%= @user.google_qr_uri %>">
+<img src="<%= @user.google_qr_to_base64 %>">
 <br />
 <%= form_tag user_mfa_session_path, method: :post do %>
   <div class="actions">
